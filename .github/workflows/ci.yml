@@ -2,7 +2,7 @@ name: Docker Image Build
 on: 
   push:
     branches:
-      - "8.2"
+      - "main"
 
 jobs:
   build-cli:
@@ -24,4 +24,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/addeeandra/php-xdebug:8.2
+          tags: ghcr.io/addeeandra/php-xdebug:latest
