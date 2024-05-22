@@ -1,4 +1,4 @@
-FROM php:8.3
+FROM php:8.2
 
 RUN pecl channel-update https://pecl.php.net/channel.xml\
     && pecl install xdebug
