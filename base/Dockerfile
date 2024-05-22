@@ -1,4 +1,6 @@
-FROM php:8.3-cli
+ARG PHP_VERSION=8.3
+
+FROM php:$PHP_VERSION-cli-alpine
 
 # install xdebug + swoole
 RUN pecl install xdebug-3.3.2 \
