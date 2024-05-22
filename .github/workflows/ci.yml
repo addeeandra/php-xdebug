@@ -2,7 +2,9 @@ name: Docker Image Build
 on: 
   push:
     branches:
-      - "main"
+      - "latest"
+      - "8.2"
+      - "8.3"
 
 jobs:
   build-cli:
@@ -18,10 +20,19 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.GHCR_USR }}
           password: ${{ secrets.GHCR_PAT }}
-      - name: Build and push
+      - name: Build and Push Base Image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./base
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/addeeandra/php-xdebug:latest
+          tags: ghcr.io/addeeandra/php-xdebug:${{ github.head_ref }}
+      - name: Build and Push Swoole Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./swoole
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ghcr.io/addeeandra/php-xdebug:${{ github.head_ref }}-swoole
+          build-args: |
+            BASE_VERSION=${{ github.head_ref }}
