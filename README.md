@@ -1,6 +1,11 @@
-# php-xdebug
+<div>
+  <h3 align="center">PHP Xdebug</h3>
+  <p align="center">Run PHP, Composer, and use Xdebug via Docker</p>
+</div>
 
-An image of PHP/Composer + XDebug [+ Swoole].
+---
+
+## Available Variant
 
 | Version         | php     | xdebug       | composer | swoole   | 
 |-----------------|---------|--------------|----------|----------|
@@ -15,12 +20,18 @@ An image of PHP/Composer + XDebug [+ Swoole].
 
 Dockerfile in this repository extending [php:{version}-cli-alpine](https://hub.docker.com/_/php) from Docker Hub and added xdebug + swoole.
 
-The images split into two stages
+The images split into 2 stages
 
-- Base Image (php-cli + xdebug) => php-xdebug:{version}
-- Swoole Image (php-xdebug:{version} + swoole) => php-xdebug:{version}-swoole
+1. Xdebug Image (php-cli + xdebug): `php-xdebug:{version}` in `base` folder
+2. Swoole Image (php-cli + xdebug + swoole): `php-xdebug:{version}-swoole` in `swoole` folder
 
-## How to use it in CLI
+## How to use (CLI)
+
+Pull the image.
+
+```bash
+docker pull ghrc.io/addeeandra/php-xdebug:8.3
+```
 
 Let's say you want to run `php` and `composer` without installing anything except docker. You can run it like this.
 
@@ -68,7 +79,7 @@ If you need to serve an open port, you can add it too.
 alias php="docker run --rm --name my-php -p 8000:8000 --interactive --tty -w /usr/src/myapp --volume $PWD:/usr/src/myapp php-xdebug:8.3 php"
 ```
 
-## How to really use the xdebug (PHPStorm)
+## How to use Xdebug (PHPStorm)
 
 Firstly, you need to pull the image into your local.
 
